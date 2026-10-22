@@ -1,4 +1,4 @@
-const CACHE='kantai-v1';
+const CACHE='kantai-v2';
 const FILES=["./", "./index.html", "./app.js", "./style.css", "./assets/AppRoute-sFojLz3E.js", "./assets/OrbitControls-DcB4Swpe.js", "./assets/PublicMemories-B5v4cmr0.js", "./assets/SelectField-BbFeZ1Q8.js", "./assets/Stadium-CFo5TjKI.js", "./assets/Stadium-DebQW7FC.css", "./assets/awe-Ca55Pf13.json", "./assets/data-DY5s3WoV.js", "./assets/hkc-Gbi7T1FS.json", "./assets/index-C2qjDEJS.js", "./assets/kaitakSeatSource-jer28SXf.json", "./assets/photos-BDoX911D.js", "./assets/photos-_G8IB1_S.js", "./assets/provenance.json", "./assets/r11-DBeBuvo4.json", "./assets/request-B-vpbw8E.js", "./assets/summit-B0YE2Xxi.json", "./assets/tpa-hUGCMqZh.json", "./assets/useUnsavedChanges-DGARbXF0.js", "./assets/viva-rS3OQoqC.json", "./assets/zhou-birds-2026.jpg"];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('kantai-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
