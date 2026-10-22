@@ -8,6 +8,7 @@ GitHub Pages: https://shandianchengzi.github.io/view/
 
 - 搜索并切换场馆、场次、分区和可用舞台布局。
 - 可点击与缩放的二维分区示意图。
+- 座位视角滚轮／双指缩放时实时显示 35mm 等效焦距，可复制并到 [取景器](https://shandianchengzi.github.io/camera-translator/) 换算手机倍数。
 - 3D 场馆全景与座位视角；不支持 WebGL 时原组件可降级为兼容渲染。
 - 前后、左右相对位置、站坐姿及屋顶切换。
 - 浏览器本地保存多个位置，复制可复现位置的链接。
@@ -32,3 +33,9 @@ GitHub Pages 由 `.github/workflows/pages.yml` 部署。仅打包页面、脚本
 原站：https://shijiao.xingpaste.com/ （视野 Live）。未发现可确认的原站开源仓库或许可证。本仓库不将第三方组件重新声明为 MIT 等开源授权，也不宣称拥有这些组件的版权。`assets/provenance.json` 记录 HAR 内组件文件原始 SHA-256；修改包括停止原应用启动、导出 UI 运行时和将静态模型链接改为本地相对路径。原第三方库声明保留于组件中。
 
 新增 `app.js`、`style.css` 和部署配置用于基础功能适配。HAR 本身、请求头、Cookie、个人登录数据不会提交。
+
+## 焦距显示
+
+沿用 camera-translator 的 35mm 等效焦距约定（手机倍数 = 目标焦距 / 基准镜头焦距）。该工具没有 FOV 反算代码，本项目补充了投影换算：`f = hypot(36,24) / (2 * hypot(aspect,1) * tan(verticalFov / 2))`，角度换算成弧度后计算。使用当前 3D 画幅比例及相机实际垂直视角，按对角线等效；调整窗口后同步更新。数值取整显示为估算值。
+
+仅“我的视角”的变焦对应焦距变化；3D 全景滚轮改变观察距离，二维图缩放也不对应镜头焦距。手机主摄参数、倍数与像素预算请在取景器中换算，不设统一的手机 1× 焦距。
